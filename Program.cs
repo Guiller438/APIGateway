@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configurar autenticación JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer("JwtBearer", options =>
+    .AddJwtBearer("Bearer", options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -30,14 +30,13 @@ builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange
 
 
 builder.Services.AddOcelot();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
         builder =>
         {
             builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-
-
         });
 });
 
